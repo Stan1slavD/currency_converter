@@ -37,8 +37,6 @@ public class MainActivity extends AppCompatActivity {
     private TextView result;
     private RelativeLayout background;
 
-    private static final String JSON_URL="http://api.currencylayer.com/live?access_key=6a4ffa146e1739ebcdf678a455fc1588";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(MainActivity.this, R.string.toast_msg, Toast.LENGTH_SHORT).show();
                 } else {
 
-convert(Integer.valueOf(fromNumber.getText().toString()),fromSpinner.getSelectedItem().toString(),toSpinner.getSelectedItem().toString());
+                        convert(Integer.valueOf(fromNumber.getText().toString()),fromSpinner.getSelectedItem().toString(),toSpinner.getSelectedItem().toString());
                 }
 
             }

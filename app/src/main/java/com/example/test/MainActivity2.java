@@ -29,9 +29,9 @@ import java.util.Date;
 
 public class MainActivity2 extends AppCompatActivity {
 ListView listView;
-    public static ArrayList<Double> yarr=new ArrayList<Double>();
+    public static ArrayList<Double> oldСurrency=new ArrayList<Double>();
 
-    public static ArrayList<Double>narr=new ArrayList<>();
+    public static ArrayList<Double>currentСurrency=new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -144,7 +144,7 @@ if(jsonObject.toString().contains("date")){
                         String s = arr[y].replaceAll("[USD,{}\"]", "");
                         s=s.replaceAll("[:]"," ");
                         double dd=Double.valueOf(s.substring(s.indexOf(" ")));
-                            yarr.add(dd);
+                            oldСurrency.add(dd);
                             String str1 =String.valueOf(dd)+" ";
                         fileOutputStream.write(str1.getBytes());
                         }
@@ -169,16 +169,16 @@ if(jsonObject.toString().contains("date")){
                         }
 
                             String endstr=stringBuffer.toString();
-                            String[] endarr=endstr.split(" ");
-                            for (int i=0;i<endarr.length;i++){
-                                yarr.add(Double.valueOf(endarr[i]));
+                            String[]  finalArray=endstr.split(" ");
+                            for (int i=0;i< finalArray.length;i++){
+                                oldСurrency.add(Double.valueOf( finalArray[i]));
                             }
                             String[] arr =  jsonObject.getString("quotes").split(",");
                             for (int y = 0; y < arr.length; y++) {
                                   String s = arr[y].replaceAll("[USD,{}\"]", "");
                                   s = s.replaceAll("[:]", " ");
                                   double dd = Double.valueOf(s.substring(s.indexOf(" ")));
-                                  narr.add(dd);
+                                  currentСurrency.add(dd);
                             }
 
                             for (int y = 0; y<arr.length;y++) {
@@ -189,18 +189,18 @@ if(jsonObject.toString().contains("date")){
                             }
 
                             for (int i = 0; i < arr.length; i++) {
-                                if (narr.get(i) >= yarr.get(i)) {
-                                    double value=(narr.get(i)-yarr.get(i))/yarr.get(i)*100;
-                                    endarr[i] = arr[i]+"        "+"\n+"+String.format("%.3f",value)+"%";
+                                if (currentСurrency.get(i) >= oldСurrency.get(i)) {
+                                    double value=(currentСurrency.get(i)-oldСurrency.get(i))/oldСurrency.get(i)*100;
+                                     finalArray[i] = arr[i]+"        "+"\n+"+String.format("%.3f",value)+"%";
                                  } else {
-                                        double value =(yarr.get(i)-narr.get(i))/yarr.get(i)*100;
-                                        endarr[i] = arr[i]+"        "+"\n-"+String.format("%.3f",value)+"%";
+                                        double value =(oldСurrency.get(i)-currentСurrency.get(i))/oldСurrency.get(i)*100;
+                                         finalArray[i] = arr[i]+"        "+"\n-"+String.format("%.3f",value)+"%";
                                          }
                             }
 
 
 
-                            ArrayAdapter adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, endarr);
+                            ArrayAdapter adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1,  finalArray);
                             listView.setAdapter(adapter);
 
                     }
