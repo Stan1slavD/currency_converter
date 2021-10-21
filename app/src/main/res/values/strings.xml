@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">test</string>
+    <string name="toast_msg">Input value</string>
+    <string name="api_key">6a4ffa146e1739ebcdf678a455fc1588</string>
+    <string-array name="currencies">
+        <item>USD</item>
+        <item>RUB</item>
+        <item>EUR</item>
+
+    </string-array>
+</resources>
